@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nereus Dashboard — Full Redesign Mockup</title>
+<style>
+  :root{
+    --bg1:#0a0e27; --bg2:#141b3c;
+    --card:rgba(255,255,255,0.045); --border:rgba(255,255,255,0.09);
+    --txt:#eef1fb; --muted:#8890b5;
+    --accent1:#4f8cff; --accent2:#8b5cf6;
+    --green:#34d399; --amber:#fbbf24; --red:#f87171;
+    font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{background:var(--bg1);color:var(--txt);margin:0;
+    padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  body{background:
+      radial-gradient(1100px 500px at 10% -5%, rgba(79,140,255,0.2), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(139,92,246,0.16), transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    padding:24px;min-height:100%}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+  .brand{font-weight:700;letter-spacing:.4px;font-size:15px}
+  .brand span{color:var(--muted);font-weight:500;font-size:12.5px;margin-left:6px}
+  .tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:4px;backdrop-filter:blur(16px)}
+  .tab{padding:7px 14px;border-radius:9px;font-size:12.5px;color:var(--muted)}
+  .tab.active{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;box-shadow:0 0 20px rgba(79,140,255,0.4)}
+  .live{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--green)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:16px;max-width:1300px}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  .col{display:flex;flex-direction:column;gap:16px}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;backdrop-filter:blur(18px)}
+  .card h3{margin:0 0 3px;font-size:13.5px;font-weight:600}
+  .sub{color:var(--muted);font-size:11px;margin:0 0 14px}
+
+  /* mission */
+  .step{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+  .step .ic{width:26px;height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+  .ic.done{background:rgba(52,211,153,0.16);color:var(--green)}
+  .ic.now{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;box-shadow:0 0 16px rgba(79,140,255,0.5);animation:pulse 1.6s infinite}
+  .ic.pend{background:rgba(255,255,255,0.06);color:var(--muted)}
+  .step b{display:block;font-size:12px;font-weight:600}
+  .step small{color:var(--muted);font-size:10px}
+  .cnt{margin-left:auto;font-size:10px;background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:7px;color:var(--muted)}
+  .cnt.now{background:rgba(79,140,255,0.2);color:#a9c6ff}
+  .line{width:1px;height:12px;background:rgba(255,255,255,0.08);margin-left:13px}
+  .line.done{background:var(--green)}
+  .cycle{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);
+    border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin-top:14px;font-size:11px;color:var(--muted)}
+  .cycle b{color:var(--txt);font-size:12px}
+
+  /* battery */
+  .batt-num{font-size:32px;font-weight:700;margin:4px 0 0;
+    background:linear-gradient(135deg,#fff,#a9c6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .batt-bar{height:10px;border-radius:7px;background:rgba(255,255,255,0.06);overflow:hidden;margin:12px 0 8px}
+  .batt-bar i{display:block;height:100%;width:78%;border-radius:7px;background:linear-gradient(90deg,var(--green),#6ee7b7);box-shadow:0 0 12px rgba(52,211,153,0.5)}
+  .batt-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+  .batt-meta b{color:var(--txt);font-weight:600}
+
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .stat{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+  .stat span{display:block;font-size:9.5px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+  .stat b{font-size:14px;font-weight:600}
+
+  /* images */
+  .imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .thumb{border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+  .thumb .ph{height:110px;background:#000;display:flex;align-items:center;justify-content:center;color:#3a3f5c;font-size:11px}
+  .thumb .cap{padding:6px 10px;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.03)}
+
+  /* two-col row */
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:900px){.row2{grid-template-columns:1fr}}
+  .video-box{height:170px;background:#050714;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .video-box p{color:var(--red);font-size:11.5px;margin:0}
+  .video-box button{background:linear-gradient(135deg,var(--accent1),var(--accent2));border:none;color:#fff;font-size:11px;padding:6px 14px;border-radius:8px;cursor:pointer}
+
+  .traj{height:170px;position:relative;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .traj .g{position:absolute;width:2px;height:2px;border-radius:50%;box-shadow:0 0 6px currentColor}
+
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:9.5px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--border)}
+  td{padding:10px 8px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">NEREUS <span>Barelang Marine Robotics Team</span></div>
+    <div class="tabs"><div class="tab active">Lintasan A</div><div class="tab">Lintasan B</div></div>
+    <div class="live"><span class="dot"></span> Live tracking</div>
+  </div>
+
+  <div class="layout">
+    <div class="col">
+      <div class="card">
+        <h3>Mission status</h3>
+        <p class="sub">Stage otomatis dari telemetri kapal</p>
+        <div class="step"><div class="ic done">✓</div><div><b>Prepare</b><small>10:02:14</small></div></div>
+        <div class="line done"></div>
+        <div class="step"><div class="ic done">✓</div><div><b>Start</b><small>10:02:40</small></div></div>
+        <div class="line done"></div>
+        <div class="step"><div class="ic now">3</div><div><b>Floating ball</b><small>Sedang berjalan</small></div><span class="cnt now">4/10</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="ic pend">•</div><div><b>Mission surface</b><small>Menunggu</small></div></div>
+        <div class="line"></div>
+        <div class="step"><div class="ic pend">•</div><div><b>Mission underwater</b><small>Menunggu</small></div></div>
+        <div class="line"></div>
+        <div class="step"><div class="ic pend">•</div><div><b>Docking</b><small>Menunggu</small></div></div>
+        <div class="line"></div>
+        <div class="step"><div class="ic pend">•</div><div><b>Finish</b><small>Menunggu</small></div></div>
+        <div class="cycle"><span>Cycle berjalan</span><b>2 / ~4 (10 menit)</b></div>
+      </div>
+
+      <div class="card">
+        <h3>Battery status</h3>
+        <p class="sub">Sumber daya utama</p>
+        <div class="batt-num">78%</div>
+        <div class="batt-bar"><i></i></div>
+        <div class="batt-meta"><span>Voltage</span><b>15.4 V</b></div>
+        <div class="batt-meta" style="margin-top:5px"><span>Estimasi sisa</span><b>~24 menit</b></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <h3>Geo-tag &amp; telemetry</h3>
+        <p class="sub">Update tiap 1 detik</p>
+        <div class="stats">
+          <div class="stat"><span>Day</span><b>Wed</b></div>
+          <div class="stat"><span>Date</span><b>23/09</b></div>
+          <div class="stat"><span>Time</span><b>10:04:20</b></div>
+          <div class="stat"><span>SOG knot</span><b>0.49</b></div>
+          <div class="stat"><span>SOG km/h</span><b>0.91</b></div>
+          <div class="stat"><span>COG</span><b>86.4°</b></div>
+          <div class="stat"><span>Position xy</span><b>2470,300</b></div>
+          <div class="stat"><span>Coordinate</span><b>1.4922,102.12</b></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Capture</h3>
+        <p class="sub">Surface &amp; underwater imaging</p>
+        <div class="imgs">
+          <div class="thumb"><div class="ph">Surface</div><div class="cap">Surface · 10:04:20</div></div>
+          <div class="thumb"><div class="ph">Underwater</div><div class="cap">Underwater · 10:04:20</div></div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="card">
+          <h3>Video streaming</h3>
+          <p class="sub">Live camera feed</p>
+          <div class="video-box"><p>Gagal terhubung ke kamera</p><button>Coba hubungkan ulang</button></div>
+        </div>
+        <div class="card">
+          <h3>Trajectory</h3>
+          <p class="sub">Peta lintasan real-time</p>
+          <div class="traj">
+            <div class="g" style="left:30%;top:20%;color:#34d399"></div>
+            <div class="g" style="left:34%;top:24%;color:#34d399"></div>
+            <div class="g" style="left:38%;top:22%;color:#f87171"></div>
+            <div class="g" style="left:60%;top:40%;color:#34d399"></div>
+            <div class="g" style="left:64%;top:44%;color:#f87171"></div>
+            <div class="g" style="left:20%;top:70%;color:#34d399"></div>
+            <div class="g" style="left:24%;top:72%;color:#f87171"></div>
+            <div class="g" style="left:70%;top:15%;color:#4f8cff"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Position log</h3>
+        <p class="sub">Riwayat lintasan terekam</p>
+        <table>
+          <tr><th>Time</th><th>Position [x,y]</th><th>SOG knot</th><th>SOG km/h</th><th>Lat, long</th><th>COG</th></tr>
+          <tr><td colspan="6" style="padding:16px">Tekan start untuk merekam lintasan</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+struktur final
+web-asv/
+└── src/
+    ├── assets/
+    │
+    ├── Components/
+    │   └── Navbar.jsx
+    │
+    ├── routes/
+    │   ├── comp/
+    │   │   ├── TrajectoryA.jsx
+    │   │   ├── TrajectoryB.jsx
+    │   │   ├── MissionStatus.jsx
+    │   │   ├── Geotag.jsx
+    │   │   ├── PositionLog.jsx
+    │   │   ├── VideoStreaming.jsx
+    │   │   ├── CaptureSurface.jsx
+    │   │   └── CaptureUnderwater.jsx
+    │   │
+    │   ├── LintasanA.jsx
+    │   └── LintasanB.jsx
+    │
+    ├── App.jsx
+    ├── main.jsx
+    └── index.css
