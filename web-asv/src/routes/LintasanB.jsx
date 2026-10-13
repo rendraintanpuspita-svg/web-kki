@@ -6,11 +6,11 @@ import CaptureUnderwater from "./comp/CaptureUnderwater";
 import PositionLog from "./comp/PositionLog";
 import TrajectoryB from "./comp/TrajectoryB";
 import BatteryStatus from "./comp/BatteryStatus";
-
 import useAsvData from "../hooks/useAsvData";
 
 function LintasanB() {
-    const { latest, log, battery, mission, resetLog } = useAsvData();
+  const { latest, log, battery, mission, video1, video2, resetLog } = useAsvData();
+
   return (
     <div className="h-[calc(100vh-232px)] px-4 pb-4">
 
@@ -20,9 +20,9 @@ function LintasanB() {
         {/* ================= LEFT ================= */}
         <div className="col-span-3 flex min-h-0 flex-col gap-4">
 
-          {/* Video Streaming */}
+          {/* Video Streaming — kamera surface */}
           <div className="min-h-0 flex-[6] overflow-hidden">
-            <VideoStreaming />
+            <VideoStreaming base64Img={video1} />
           </div>
 
           {/* Mission Status */}
@@ -36,7 +36,6 @@ function LintasanB() {
         {/* ================= CENTER ================= */}
         <div className="col-span-6 min-h-0">
 
-          {/* CENTER SAMA SEPERTI LINTASAN A */}
           <div className="grid h-full grid-rows-[3fr_4fr_3fr] gap-4">
 
             {/* Geotag & Telemetry */}
@@ -48,18 +47,18 @@ function LintasanB() {
             <div className="grid min-h-0 grid-cols-2 gap-4">
 
               <div className="min-h-0 overflow-hidden">
-                <CaptureSurface />
+                <CaptureSurface base64Img={video1} />
               </div>
 
               <div className="min-h-0 overflow-hidden">
-                <CaptureUnderwater />
+                <CaptureUnderwater base64Img={video2} />
               </div>
 
             </div>
 
             {/* Position Log */}
             <div className="min-h-0 overflow-hidden">
-              <PositionLog />
+              <PositionLog log={log} onReset={resetLog} />
             </div>
 
           </div>
@@ -90,7 +89,7 @@ function LintasanB() {
 
           {/* Battery Status */}
           <div className="min-h-0 flex-[3] overflow-hidden">
-            <BatteryStatus />
+            <BatteryStatus battery={battery} />
           </div>
 
         </div>
