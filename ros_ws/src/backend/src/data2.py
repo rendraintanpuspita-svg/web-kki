@@ -15,10 +15,10 @@ latitude = longitude = cog = sog = 0.0
 x = y = 0.0
 
 # konfigurasi back4app
-URL = "https://parseapi.back4app.com/classes/nirmala"
+URL = "https://parseapi.back4app.com/classes/kapal"
 BACK4APP_HEADERS = {
-    'X-Parse-Application-Id': 'dUP2XE7bPBGnpz1rRT9fWlVvf1XZ9D0ukkpsxhLv',
-    'X-Parse-REST-API-Key': 'DZbe1lu0xVOeBniJD04FCXRTyN50EVsavJLRuwJS',
+    'X-Parse-Application-Id': 'dWmMzg8refPpHQnp7dSjQRForwI9rpW4ftphXUwr',
+    'X-Parse-REST-API-Key': '6cwraZgkMzXb9msJIbsD5X2F7krKIv5giVsuQe2p',
     'Content-Type': 'application/json',}
 
 async def upload_to_back4app(session, data: dict):
