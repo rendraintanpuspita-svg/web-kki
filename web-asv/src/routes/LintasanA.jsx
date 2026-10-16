@@ -1,3 +1,4 @@
+
 import MissionStatus from "./comp/MissionStatus";
 import BatteryStatus from "./comp/BatteryStatus";
 import Geotag from "./comp/Geotag";
