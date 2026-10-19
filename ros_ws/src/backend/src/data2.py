@@ -9,7 +9,7 @@ from backend.msg import Gpsdata
 from backend.msg import Motiondata
 from datetime import datetime
 
-save_folder = "/home/mala/kki26/web_app/public"
+save_folder = "/home/rein//web-asv/public"
 last_upload_time = 0
 latitude = longitude = cog = sog = 0.0 
 x = y = 0.0

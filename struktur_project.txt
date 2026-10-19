@@ -1,0 +1,367 @@
+.
+├── .gitignore
+├── notes
+│   └── struktur final web asv.txt
+├── reference
+│   ├── kki-asv-dashboard-redesign.html
+│   ├── Lintasan A.jpeg
+│   ├── Lintasan B.jpeg
+│   └── polbatam.png
+├── ros_ws
+│   ├── install
+│   │   ├── asv_dummy
+│   │   │   ├── lib
+│   │   │   │   ├── asv_dummy
+│   │   │   │   │   └── dummy_publisher
+│   │   │   │   └── python3.12
+│   │   │   │       └── site-packages
+│   │   │   │           ├── asv_dummy
+│   │   │   │           │   ├── dummy_publisher.py
+│   │   │   │           │   ├── __init__.py
+│   │   │   │           │   └── simulator.py
+│   │   │   │           └── asv_dummy-0.0.0-py3.12.egg-info
+│   │   │   │               ├── dependency_links.txt
+│   │   │   │               ├── entry_points.txt
+│   │   │   │               ├── PKG-INFO
+│   │   │   │               ├── requires.txt
+│   │   │   │               ├── SOURCES.txt
+│   │   │   │               ├── top_level.txt
+│   │   │   │               └── zip-safe
+│   │   │   └── share
+│   │   │       ├── ament_index
+│   │   │       │   └── resource_index
+│   │   │       │       └── packages
+│   │   │       │           └── asv_dummy
+│   │   │       ├── asv_dummy
+│   │   │       │   ├── hook
+│   │   │       │   │   ├── ament_prefix_path.dsv
+│   │   │       │   │   ├── ament_prefix_path.ps1
+│   │   │       │   │   ├── ament_prefix_path.sh
+│   │   │       │   │   ├── pythonpath.dsv
+│   │   │       │   │   ├── pythonpath.ps1
+│   │   │       │   │   └── pythonpath.sh
+│   │   │       │   ├── package.bash
+│   │   │       │   ├── package.dsv
+│   │   │       │   ├── package.ps1
+│   │   │       │   ├── package.sh
+│   │   │       │   ├── package.xml
+│   │   │       │   └── package.zsh
+│   │   │       └── colcon-core
+│   │   │           └── packages
+│   │   │               └── asv_dummy
+│   │   ├── backend
+│   │   │   ├── include
+│   │   │   │   └── backend
+│   │   │   │       └── backend
+│   │   │   │           └── msg
+│   │   │   │               ├── detail
+│   │   │   │               │   ├── gpsdata__builder.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/gpsdata__builder.hpp
+│   │   │   │               │   ├── gpsdata__functions.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/gpsdata__functions.h
+│   │   │   │               │   ├── gpsdata__rosidl_typesupport_fastrtps_c.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_c/backend/msg/detail/gpsdata__rosidl_typesupport_fastrtps_c.h
+│   │   │   │               │   ├── gpsdata__rosidl_typesupport_fastrtps_cpp.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_cpp/backend/msg/detail/gpsdata__rosidl_typesupport_fastrtps_cpp.hpp
+│   │   │   │               │   ├── gpsdata__rosidl_typesupport_introspection_c.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_introspection_c/backend/msg/detail/gpsdata__rosidl_typesupport_introspection_c.h
+│   │   │   │               │   ├── gpsdata__rosidl_typesupport_introspection_cpp.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_introspection_cpp/backend/msg/detail/gpsdata__rosidl_typesupport_introspection_cpp.hpp
+│   │   │   │               │   ├── gpsdata__struct.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/gpsdata__struct.h
+│   │   │   │               │   ├── gpsdata__struct.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/gpsdata__struct.hpp
+│   │   │   │               │   ├── gpsdata__traits.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/gpsdata__traits.hpp
+│   │   │   │               │   ├── gpsdata__type_support.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/gpsdata__type_support.h
+│   │   │   │               │   ├── gpsdata__type_support.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/gpsdata__type_support.hpp
+│   │   │   │               │   ├── motiondata__builder.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/motiondata__builder.hpp
+│   │   │   │               │   ├── motiondata__functions.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/motiondata__functions.h
+│   │   │   │               │   ├── motiondata__rosidl_typesupport_fastrtps_c.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_c/backend/msg/detail/motiondata__rosidl_typesupport_fastrtps_c.h
+│   │   │   │               │   ├── motiondata__rosidl_typesupport_fastrtps_cpp.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_cpp/backend/msg/detail/motiondata__rosidl_typesupport_fastrtps_cpp.hpp
+│   │   │   │               │   ├── motiondata__rosidl_typesupport_introspection_c.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_introspection_c/backend/msg/detail/motiondata__rosidl_typesupport_introspection_c.h
+│   │   │   │               │   ├── motiondata__rosidl_typesupport_introspection_cpp.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_introspection_cpp/backend/msg/detail/motiondata__rosidl_typesupport_introspection_cpp.hpp
+│   │   │   │               │   ├── motiondata__struct.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/motiondata__struct.h
+│   │   │   │               │   ├── motiondata__struct.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/motiondata__struct.hpp
+│   │   │   │               │   ├── motiondata__traits.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/motiondata__traits.hpp
+│   │   │   │               │   ├── motiondata__type_support.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/detail/motiondata__type_support.h
+│   │   │   │               │   └── motiondata__type_support.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/detail/motiondata__type_support.hpp
+│   │   │   │               ├── gpsdata.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/gpsdata.h
+│   │   │   │               ├── gpsdata.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/gpsdata.hpp
+│   │   │   │               ├── motiondata.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/motiondata.h
+│   │   │   │               ├── motiondata.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/motiondata.hpp
+│   │   │   │               ├── rosidl_generator_cpp__visibility_control.hpp -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_cpp/backend/msg/rosidl_generator_cpp__visibility_control.hpp
+│   │   │   │               ├── rosidl_generator_c__visibility_control.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_c/backend/msg/rosidl_generator_c__visibility_control.h
+│   │   │   │               ├── rosidl_typesupport_fastrtps_cpp__visibility_control.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_cpp/backend/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+│   │   │   │               ├── rosidl_typesupport_fastrtps_c__visibility_control.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_fastrtps_c/backend/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+│   │   │   │               └── rosidl_typesupport_introspection_c__visibility_control.h -> /home/rein/web_kki/ros_ws/build/backend/rosidl_typesupport_introspection_c/backend/msg/rosidl_typesupport_introspection_c__visibility_control.h
+│   │   │   ├── lib
+│   │   │   │   ├── backend
+│   │   │   │   │   ├── data2.py -> /home/rein/web_kki/ros_ws/src/backend/src/data2.py
+│   │   │   │   │   ├── data.py -> /home/rein/web_kki/ros_ws/src/backend/src/data.py
+│   │   │   │   │   ├── dummy_pub.py -> /home/rein/web_kki/ros_ws/src/backend/src/dummy_pub.py
+│   │   │   │   │   ├── gps.py -> /home/rein/web_kki/ros_ws/src/backend/src/gps.py
+│   │   │   │   │   └── image.py -> /home/rein/web_kki/ros_ws/src/backend/src/image.py
+│   │   │   │   ├── libbackend__rosidl_generator_c.so
+│   │   │   │   ├── libbackend__rosidl_generator_py.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_cpp.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_c.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_fastrtps_cpp.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_fastrtps_c.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_introspection_cpp.so
+│   │   │   │   ├── libbackend__rosidl_typesupport_introspection_c.so
+│   │   │   │   └── python3.12
+│   │   │   │       └── site-packages
+│   │   │   │           ├── backend
+│   │   │   │           │   ├── _backend_s.ep.rosidl_typesupport_c.c -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/_backend_s.ep.rosidl_typesupport_c.c
+│   │   │   │           │   ├── _backend_s.ep.rosidl_typesupport_fastrtps_c.c -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/_backend_s.ep.rosidl_typesupport_fastrtps_c.c
+│   │   │   │           │   ├── _backend_s.ep.rosidl_typesupport_introspection_c.c -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/_backend_s.ep.rosidl_typesupport_introspection_c.c
+│   │   │   │           │   ├── backend_s__rosidl_typesupport_c.so -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/backend_s__rosidl_typesupport_c.so
+│   │   │   │           │   ├── backend_s__rosidl_typesupport_fastrtps_c.so -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/backend_s__rosidl_typesupport_fastrtps_c.so
+│   │   │   │           │   ├── backend_s__rosidl_typesupport_introspection_c.so -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/backend_s__rosidl_typesupport_introspection_c.so
+│   │   │   │           │   ├── __init__.py -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/__init__.py
+│   │   │   │           │   └── msg
+│   │   │   │           │       ├── _gpsdata.py -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/msg/_gpsdata.py
+│   │   │   │           │       ├── _gpsdata_s.c -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/msg/_gpsdata_s.c
+│   │   │   │           │       ├── __init__.py -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/msg/__init__.py
+│   │   │   │           │       ├── _motiondata.py -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/msg/_motiondata.py
+│   │   │   │           │       └── _motiondata_s.c -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_py/backend/msg/_motiondata_s.c
+│   │   │   │           └── backend-0.0.0-py3.12.egg-info
+│   │   │   │               ├── dependency_links.txt -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_python/backend/backend.egg-info/dependency_links.txt
+│   │   │   │               ├── PKG-INFO -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_python/backend/backend.egg-info/PKG-INFO
+│   │   │   │               ├── SOURCES.txt -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_python/backend/backend.egg-info/SOURCES.txt
+│   │   │   │               └── top_level.txt -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_python/backend/backend.egg-info/top_level.txt
+│   │   │   └── share
+│   │   │       ├── ament_index
+│   │   │       │   └── resource_index
+│   │   │       │       ├── package_run_dependencies
+│   │   │       │       │   └── backend -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/backend
+│   │   │       │       ├── packages
+│   │   │       │       │   └── backend -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_index/share/ament_index/resource_index/packages/backend
+│   │   │       │       ├── parent_prefix_path
+│   │   │       │       │   └── backend -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/backend
+│   │   │       │       ├── rosidl_interfaces
+│   │   │       │       │   └── backend -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_index/share/ament_index/resource_index/rosidl_interfaces/backend
+│   │   │       │       └── rust_packages
+│   │   │       │           └── backend -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_index/share/ament_index/resource_index/rust_packages/backend
+│   │   │       ├── backend
+│   │   │       │   ├── cmake
+│   │   │       │   │   ├── ament_cmake_export_dependencies-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake
+│   │   │       │   │   ├── ament_cmake_export_include_directories-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_export_include_directories/ament_cmake_export_include_directories-extras.cmake
+│   │   │       │   │   ├── ament_cmake_export_libraries-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_export_libraries/ament_cmake_export_libraries-extras.cmake
+│   │   │       │   │   ├── ament_cmake_export_targets-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_export_targets/ament_cmake_export_targets-extras.cmake
+│   │   │       │   │   ├── backendConfig.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_core/backendConfig.cmake
+│   │   │       │   │   ├── backendConfig-version.cmake -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_core/backendConfig-version.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_cExport.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_cExport-noconfig.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_cppExport.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_cppExport-noconfig.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_introspection_cExport.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_introspection_cExport-noconfig.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_introspection_cppExport.cmake
+│   │   │       │   │   ├── backend__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+│   │   │       │   │   ├── export_backend__rosidl_generator_cExport.cmake
+│   │   │       │   │   ├── export_backend__rosidl_generator_cExport-noconfig.cmake
+│   │   │       │   │   ├── export_backend__rosidl_generator_cppExport.cmake
+│   │   │       │   │   ├── export_backend__rosidl_generator_pyExport.cmake
+│   │   │       │   │   ├── export_backend__rosidl_generator_pyExport-noconfig.cmake
+│   │   │       │   │   ├── export_backend__rosidl_typesupport_fastrtps_cExport.cmake
+│   │   │       │   │   ├── export_backend__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+│   │   │       │   │   ├── export_backend__rosidl_typesupport_fastrtps_cppExport.cmake
+│   │   │       │   │   ├── export_backend__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+│   │   │       │   │   ├── rosidl_cmake_aggregate_target-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/rosidl_cmake/rosidl_cmake_aggregate_target-extras.cmake
+│   │   │       │   │   ├── rosidl_cmake_export_typesupport_libraries-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/rosidl_cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+│   │   │       │   │   ├── rosidl_cmake_export_typesupport_targets-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/rosidl_cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+│   │   │       │   │   └── rosidl_cmake-extras.cmake -> /home/rein/web_kki/ros_ws/build/backend/rosidl_cmake/rosidl_cmake-extras.cmake
+│   │   │       │   ├── environment
+│   │   │       │   │   ├── ament_prefix_path.dsv -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/ament_prefix_path.dsv
+│   │   │       │   │   ├── ament_prefix_path.sh -> /opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh
+│   │   │       │   │   ├── library_path.dsv -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/library_path.dsv
+│   │   │       │   │   ├── library_path.sh -> /opt/ros/jazzy/lib/python3.12/site-packages/ament_package/template/environment_hook/library_path.sh
+│   │   │       │   │   ├── path.dsv -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/path.dsv
+│   │   │       │   │   ├── path.sh -> /opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh
+│   │   │       │   │   ├── pythonpath.dsv -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/pythonpath.dsv
+│   │   │       │   │   └── pythonpath.sh -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/pythonpath.sh
+│   │   │       │   ├── hook
+│   │   │       │   │   ├── cmake_prefix_path.dsv
+│   │   │       │   │   ├── cmake_prefix_path.ps1
+│   │   │       │   │   ├── cmake_prefix_path.sh
+│   │   │       │   │   ├── ld_library_path_lib.dsv
+│   │   │       │   │   ├── ld_library_path_lib.ps1
+│   │   │       │   │   ├── ld_library_path_lib.sh
+│   │   │       │   │   ├── pythonpath.dsv
+│   │   │       │   │   ├── pythonpath.ps1
+│   │   │       │   │   └── pythonpath.sh
+│   │   │       │   ├── local_setup.bash -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/local_setup.bash
+│   │   │       │   ├── local_setup.dsv -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/local_setup.dsv
+│   │   │       │   ├── local_setup.sh -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/local_setup.sh
+│   │   │       │   ├── local_setup.zsh -> /home/rein/web_kki/ros_ws/build/backend/ament_cmake_environment_hooks/local_setup.zsh
+│   │   │       │   ├── msg
+│   │   │       │   │   ├── Gpsdata.idl -> /home/rein/web_kki/ros_ws/build/backend/rosidl_adapter/backend/msg/Gpsdata.idl
+│   │   │       │   │   ├── Gpsdata.json -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_type_description/backend/msg/Gpsdata.json
+│   │   │       │   │   ├── Gpsdata.msg -> /home/rein/web_kki/ros_ws/src/backend/msg/Gpsdata.msg
+│   │   │       │   │   ├── Motiondata.idl -> /home/rein/web_kki/ros_ws/build/backend/rosidl_adapter/backend/msg/Motiondata.idl
+│   │   │       │   │   ├── Motiondata.json -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_type_description/backend/msg/Motiondata.json
+│   │   │       │   │   └── Motiondata.msg -> /home/rein/web_kki/ros_ws/src/backend/msg/Motiondata.msg
+│   │   │       │   ├── package.bash
+│   │   │       │   ├── package.dsv
+│   │   │       │   ├── package.ps1
+│   │   │       │   ├── package.sh
+│   │   │       │   ├── package.xml -> /home/rein/web_kki/ros_ws/src/backend/package.xml
+│   │   │       │   ├── package.zsh
+│   │   │       │   └── rust
+│   │   │       │       ├── build.rs -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_rs/backend/rust/build.rs
+│   │   │       │       ├── Cargo.toml -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_rs/backend/rust/Cargo.toml
+│   │   │       │       └── src
+│   │   │       │           ├── lib.rs -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_rs/backend/rust/src/lib.rs
+│   │   │       │           ├── msg
+│   │   │       │           │   └── rmw.rs -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_rs/backend/rust/src/msg/rmw.rs
+│   │   │       │           └── msg.rs -> /home/rein/web_kki/ros_ws/build/backend/rosidl_generator_rs/backend/rust/src/msg.rs
+│   │   │       └── colcon-core
+│   │   │           └── packages
+│   │   │               └── backend
+│   │   ├── COLCON_IGNORE
+│   │   ├── .colcon_install_layout
+│   │   ├── local_setup.bash
+│   │   ├── local_setup.ps1
+│   │   ├── local_setup.sh
+│   │   ├── _local_setup_util_ps1.py
+│   │   ├── _local_setup_util_sh.py
+│   │   ├── local_setup.zsh
+│   │   ├── setup.bash
+│   │   ├── setup.ps1
+│   │   ├── setup.sh
+│   │   └── setup.zsh
+│   ├── log
+│   │   ├── build_2026-10-07_06-36-04
+│   │   │   ├── asv_dummy
+│   │   │   │   ├── command.log
+│   │   │   │   ├── stderr.log
+│   │   │   │   ├── stdout.log
+│   │   │   │   ├── stdout_stderr.log
+│   │   │   │   └── streams.log
+│   │   │   ├── events.log
+│   │   │   └── logger_all.log
+│   │   ├── build_2026-10-07_06-45-18
+│   │   │   ├── asv_dummy
+│   │   │   │   ├── command.log
+│   │   │   │   ├── stderr.log
+│   │   │   │   ├── stdout.log
+│   │   │   │   ├── stdout_stderr.log
+│   │   │   │   └── streams.log
+│   │   │   ├── events.log
+│   │   │   └── logger_all.log
+│   │   ├── build_2026-10-15_17-57-42
+│   │   │   ├── backend
+│   │   │   │   ├── command.log
+│   │   │   │   ├── stderr.log
+│   │   │   │   ├── stdout.log
+│   │   │   │   ├── stdout_stderr.log
+│   │   │   │   └── streams.log
+│   │   │   ├── events.log
+│   │   │   └── logger_all.log
+│   │   ├── build_2026-10-15_18-00-58
+│   │   │   ├── backend
+│   │   │   │   ├── command.log
+│   │   │   │   ├── stderr.log
+│   │   │   │   ├── stdout.log
+│   │   │   │   ├── stdout_stderr.log
+│   │   │   │   └── streams.log
+│   │   │   ├── events.log
+│   │   │   └── logger_all.log
+│   │   ├── COLCON_IGNORE
+│   │   ├── latest -> latest_build
+│   │   └── latest_build -> build_2026-10-15_18-00-58
+│   └── src
+│       ├── asv_dummy
+│       │   ├── asv_dummy
+│       │   │   ├── dummy_publisher.py
+│       │   │   ├── __init__.py
+│       │   │   └── simulator.py
+│       │   ├── package.xml
+│       │   ├── resource
+│       │   │   └── asv_dummy
+│       │   ├── setup.cfg
+│       │   ├── setup.py
+│       │   └── test
+│       │       ├── test_copyright.py
+│       │       ├── test_flake8.py
+│       │       └── test_pep257.py
+│       └── backend
+│           ├── CMakeLists.txt
+│           ├── include
+│           │   └── backend
+│           ├── LICENSE
+│           ├── msg
+│           │   ├── Gpsdata.msg
+│           │   └── Motiondata.msg
+│           ├── package.xml
+│           └── src
+│               ├── data2.py
+│               ├── data.py
+│               ├── dummy_pub.py
+│               ├── gps.py
+│               └── image.py
+├── src_backup
+│   ├── App.css
+│   ├── App.jsx
+│   ├── assets
+│   │   ├── bmrt.png
+│   │   └── polbatam.png
+│   ├── Components
+│   │   └── Navbar.jsx
+│   ├── index.css
+│   ├── main.jsx
+│   └── routes
+│       ├── comp
+│       │   ├── BatteryStatus.jsx
+│       │   ├── CaptureSurface.jsx
+│       │   ├── CaptureUnderwater.jsx
+│       │   ├── Geotag.jsx
+│       │   ├── MissionStatus.jsx
+│       │   ├── PositionLog.jsx
+│       │   ├── TrajectoryA.jsx
+│       │   ├── TrajectoryB.jsx
+│       │   └── VideoStreaming.jsx
+│       ├── Dashboard.jsx
+│       ├── LintasanA.jsx
+│       └── LintasanB.jsx
+├── struktur_project.txt
+├── .vscode
+│   └── settings.json
+└── web-asv
+    ├── .gitignore
+    ├── index.html
+    ├── .oxlintrc.json
+    ├── package.json
+    ├── package-lock.json
+    ├── public
+    ├── README.md
+    ├── src
+    │   ├── App.css
+    │   ├── App.jsx
+    │   ├── assets
+    │   │   ├── bmrt.png
+    │   │   └── polbatam.png
+    │   ├── Components
+    │   │   ├── ConnectionStatus.jsx
+    │   │   └── Navbar.jsx
+    │   ├── config.js
+    │   ├── context
+    │   │   └── RosContext.jsx
+    │   ├── hooks
+    │   │   ├── useAsvData.js
+    │   │   └── useJsonTopic.js
+    │   ├── index.css
+    │   ├── lib
+    │   │   └── rosConnection.js
+    │   ├── main.jsx
+    │   └── routes
+    │       ├── comp
+    │       │   ├── BatteryStatus.jsx
+    │       │   ├── CaptureSurface.jsx
+    │       │   ├── CaptureUnderwater.jsx
+    │       │   ├── Geotag.jsx
+    │       │   ├── MissionStatus.jsx
+    │       │   ├── PositionLog.jsx
+    │       │   ├── TrajectoryA.jsx
+    │       │   ├── TrajectoryB.jsx
+    │       │   └── VideoStreaming.jsx
+    │       ├── Dashboard.jsx
+    │       ├── LintasanA.jsx
+    │       └── LintasanB.jsx
+    ├── vercel.json
+    └── vite.config.js
+
+88 directories, 277 files
