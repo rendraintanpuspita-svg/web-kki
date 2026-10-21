@@ -26,6 +26,7 @@ install(
     src/dummy_pub.py
     src/image.py
     src/gps.py
+    src/web_monitor_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -1,5 +1,26 @@
-// base64Img: string base64 JPEG dari /asv/video1 (surface camera)
-function CaptureSurface({ base64Img }) {
+/**
+ * CaptureSurface.jsx
+ * ==================
+ * Menampilkan gambar hasil capture kamera surface.
+ *
+ * Props:
+ *   src       : string — URL gambar (dari useCaptureImages hook)
+ *               Contoh: http://IP:2601/images/sbox1.jpg?t=1234567890
+ *   base64Img : string — fallback base64 dari rosbridge (opsional)
+ *
+ * Prioritas: src > base64Img > placeholder
+ */
+
+const FALLBACK = '/surface.jpg';
+
+function CaptureSurface({ src, base64Img }) {
+  // Pilih sumber gambar
+  const imgSrc = src
+    ? src
+    : base64Img
+    ? `data:image/jpeg;base64,${base64Img}`
+    : null;
+
   return (
     <div className="flex h-full min-h-0 flex-col rounded-xl border border-white/10 bg-slate-900 p-4">
 
@@ -7,20 +28,24 @@ function CaptureSurface({ base64Img }) {
         Capture Surface
       </h2>
 
-      <div className="min-h-0 flex-1 rounded-lg bg-black border border-white/10 flex items-center justify-center overflow-hidden">
-
-        {base64Img ? (
+      <div className="min-h-0 flex-1 rounded-lg bg-black border border-white/10
+                      flex items-center justify-center overflow-hidden">
+        {imgSrc ? (
           <img
-            src={`data:image/jpeg;base64,${base64Img}`}
-            alt="Surface camera"
+            src={imgSrc}
+            alt="Surface capture"
             className="h-full w-full object-contain"
+            onError={(e) => {
+              // Kalau URL gagal → tampilkan fallback
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = FALLBACK;
+            }}
           />
         ) : (
           <p className="text-sm text-slate-500">
-            Surface Camera
+            Menunggu gambar surface...
           </p>
         )}
-
       </div>
 
     </div>

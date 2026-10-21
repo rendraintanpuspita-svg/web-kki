@@ -1,31 +1,49 @@
-import VideoStreaming from "./comp/VideoStreaming";
-import MissionStatus from "./comp/MissionStatus";
-import Geotag from "./comp/Geotag";
-import CaptureSurface from "./comp/CaptureSurface";
-import CaptureUnderwater from "./comp/CaptureUnderwater";
-import PositionLog from "./comp/PositionLog";
-import TrajectoryB from "./comp/TrajectoryB";
-import BatteryStatus from "./comp/BatteryStatus";
-import useAsvData from "../hooks/useAsvData";
+/**
+ * LintasanB.jsx
+ * =============
+ * Halaman monitoring lintasan B — sama dengan LintasanA, beda Trajectory.
+ */
+
+import VideoStreaming      from './comp/VideoStreaming';
+import MissionStatus      from './comp/MissionStatus';
+import Geotag             from './comp/Geotag';
+import CaptureSurface     from './comp/CaptureSurface';
+import CaptureUnderwater  from './comp/CaptureUnderwater';
+import PositionLog        from './comp/PositionLog';
+import TrajectoryB        from './comp/TrajectoryB';
+import BatteryStatus      from './comp/BatteryStatus';
+
+import useAsvData         from '../hooks/useAsvData';
+import useBack4AppData    from '../hooks/useBack4AppData';
+import useCaptureImages   from '../hooks/useCaptureImages';
+import { DATA_SOURCE, VIDEO_STREAM_URL } from '../config';
 
 function LintasanB() {
-  const { latest, log, battery, mission, video1, video2, resetLog } = useAsvData();
+  const rosBridge = useAsvData();
+  const back4App  = useBack4AppData();
+
+  const isRosBridge = DATA_SOURCE !== 'back4app';
+  const { latest, log, battery, mission, video1, video2, resetLog } =
+    isRosBridge ? rosBridge : { ...back4App, battery: null, mission: null, video1: null, video2: null };
+
+  const { surfaceSrc, underwaterSrc } = useCaptureImages();
+  const streamUrl = VIDEO_STREAM_URL || null;
 
   return (
     <div className="h-[calc(100vh-232px)] px-4 pb-4">
 
-      {/* ================= MAIN 3 COLUMNS ================= */}
       <div className="grid h-full grid-cols-12 gap-4">
 
         {/* ================= LEFT ================= */}
         <div className="col-span-3 flex min-h-0 flex-col gap-4">
 
-          {/* Video Streaming — kamera surface */}
           <div className="min-h-0 flex-[6] overflow-hidden">
-            <VideoStreaming base64Img={video1} />
+            <VideoStreaming
+              streamUrl={streamUrl}
+              base64Img={video1}
+            />
           </div>
 
-          {/* Mission Status */}
           <div className="min-h-0 flex-[4] overflow-hidden">
             <MissionStatus step={mission?.step ?? null} />
           </div>
@@ -38,25 +56,28 @@ function LintasanB() {
 
           <div className="grid h-full grid-rows-[3fr_4fr_3fr] gap-4">
 
-            {/* Geotag & Telemetry */}
             <div className="min-h-0 overflow-hidden">
               <Geotag data={latest} />
             </div>
 
-            {/* Capture Surface + Underwater */}
             <div className="grid min-h-0 grid-cols-2 gap-4">
 
               <div className="min-h-0 overflow-hidden">
-                <CaptureSurface base64Img={video1} />
+                <CaptureSurface
+                  src={surfaceSrc}
+                  base64Img={video1}
+                />
               </div>
 
               <div className="min-h-0 overflow-hidden">
-                <CaptureUnderwater base64Img={video2} />
+                <CaptureUnderwater
+                  src={underwaterSrc}
+                  base64Img={video2}
+                />
               </div>
 
             </div>
 
-            {/* Position Log */}
             <div className="min-h-0 overflow-hidden">
               <PositionLog log={log} onReset={resetLog} />
             </div>
@@ -69,7 +90,6 @@ function LintasanB() {
         {/* ================= RIGHT ================= */}
         <div className="col-span-3 flex min-h-0 flex-col gap-4">
 
-          {/* Trajectory B */}
           <div className="min-h-0 flex-[9] overflow-hidden">
 
             <div className="flex h-full min-h-0 flex-col rounded-xl border border-white/10 bg-slate-900 p-4">
@@ -86,8 +106,6 @@ function LintasanB() {
 
           </div>
 
-
-          {/* Battery Status */}
           <div className="min-h-0 flex-[3] overflow-hidden">
             <BatteryStatus battery={battery} />
           </div>
