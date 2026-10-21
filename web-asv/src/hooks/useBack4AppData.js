@@ -1,73 +1,42 @@
-/**
- * useBack4AppData.js
- * ==================
- * Hook untuk fetch data GPS + Motion dari Back4App.
- * Dipakai saat DATA_SOURCE = 'back4app' (mode online / Vercel).
- *
- * Data yang di-fetch:
- *   Back4App class: kapal (atau sesuai VITE_BACK4APP_CLASS)
- *   Field di Back4App: Latitude, Longitude, COG, SOG_Knot, SOG_kmperhours,
- *                      x, y, code, Day, Date, Time
- *
- * Return:
- *   latest : objek data terbaru (sudah dinormalisasi nama field)
- *   log    : array semua data (terbaru di atas, max MAX_LOG baris)
- *   resetLog: fungsi untuk reset log
- *
- * Normalisasi field (supaya komponen tidak perlu tahu asal data):
- *   Latitude / Lattitude → lat
- *   Longitude            → lon
- *   SOG_Knot             → sog_knot
- *   SOG_kmperhours       → sog_kmh
- *   COG                  → cog
- *   x, y                 → x, y (sama)
- *   Date, Time, Day      → date, time, day
- */
-
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   BACK4APP_URL,
   BACK4APP_APP_ID,
   BACK4APP_REST_KEY,
   BACK4APP_POLL_MS,
   MAX_LOG,
+  DATA_SOURCE,
 } from '../config';
 
-// ─────────────────────────────────────────────────────────────
-// Normalisasi satu baris dari Back4App → format internal
-// ─────────────────────────────────────────────────────────────
 function normalizeItem(item) {
-  // Back4App lama pakai 'Lattitude' (typo), baru pakai 'Latitude'
   const latRaw = item.Latitude ?? item.Lattitude ?? 0;
-
   return {
-    // ID unik dari Back4App (untuk dedup)
     objectId:  item.objectId,
-    // Normalisasi nama field → cocok dengan Geotag.jsx & PositionLog.jsx
+    createdAt: item.createdAt,
     lat:       Number(latRaw),
-    lon:       Number(item.Longitude    ?? 0),
-    cog:       Number(item.COG          ?? 0),
-    sog_knot:  Number(item.SOG_Knot     ?? 0),
+    lon:       Number(item.Longitude      ?? 0),
+    cog:       Number(item.COG            ?? 0),
+    sog_knot:  Number(item.SOG_Knot       ?? 0),
     sog_kmh:   Number(item.SOG_kmperhours ?? 0),
-    x:         Number(item.x            ?? 0),
-    y:         Number(item.y            ?? 0),
-    code:      item.code  || null,
-    date:      item.Date  ?? '-',
-    time:      item.Time  ?? '-',
-    day:       item.Day   ?? '-',
-    // Pertahankan field asli untuk kompatibilitas
+    x:         Number(item.x              ?? 0),
+    y:         Number(item.y              ?? 0),
+    code:      item.code || null,
+    date:      item.Date ?? '-',
+    time:      item.Time ?? '-',
+    day:       item.Day  ?? '-',
     _raw: item,
   };
 }
 
-// ─────────────────────────────────────────────────────────────
-// Hook
-// ─────────────────────────────────────────────────────────────
 export default function useBack4AppData() {
-  const [latest, setLatest]   = useState(null);
-  const [log, setLog]         = useState([]);
+  const [latest, setLatest]       = useState(null);
+  const [log, setLog]             = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError]     = useState(null);
+  const [error, setError]         = useState(null);
+  const [isStale, setIsStale]     = useState(true);
+
+  // createdAt terakhir yang sudah diproses
+  const sinceRef = useRef(null);
 
   const resetLog = useCallback(() => {
     setLog([]);
@@ -75,6 +44,9 @@ export default function useBack4AppData() {
   }, []);
 
   useEffect(() => {
+    // Mode rosbridge → tidak perlu polling cloud
+    if (DATA_SOURCE !== 'back4app') return;
+
     if (!BACK4APP_APP_ID || !BACK4APP_REST_KEY) {
       setError('BACK4APP_APP_ID / BACK4APP_REST_KEY belum dikonfigurasi di .env.local');
       return;
@@ -86,47 +58,53 @@ export default function useBack4AppData() {
     };
 
     let active = true;
+    const STALE_MS = 15000;
 
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(
-          `${BACK4APP_URL}?order=-createdAt&limit=1`,
-          { headers }
-        );
 
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
+        // Pertama: 1 baris terbaru. Berikutnya: semua baris yang lebih baru
+        // dari yang terakhir dilihat (urut lama → baru).
+        let url;
+        if (sinceRef.current) {
+          const where = encodeURIComponent(JSON.stringify({
+            createdAt: { $gt: { __type: 'Date', iso: sinceRef.current } },
+          }));
+          url = `${BACK4APP_URL}?order=createdAt&limit=100&where=${where}`;
+        } else {
+          url = `${BACK4APP_URL}?order=-createdAt&limit=1`;
         }
 
+        const res = await fetch(url, { headers });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
 
         if (!active) return;
         setError(null);
 
-        if (!json.results || json.results.length === 0) return;
+        const rows = json.results ?? [];
+        if (rows.length > 0) {
+          const items = rows.map(normalizeItem);
+          sinceRef.current = rows[rows.length - 1].createdAt;
+          setLatest(items[items.length - 1]);
 
-        const item = normalizeItem(json.results[0]);
-
-        setLatest(item);
-
-        // ─────────────────────────────────────────────────────
-        // Reset log jika code = '0125' (robot reset posisi)
-        // ─────────────────────────────────────────────────────
-        if (item.code === '0125') {
-          setLog([item]);
-          return;
+          setLog((prev) => {
+            let next = prev;
+            for (const it of items) {
+              if (it.code === '0125') {
+                next = [it];                       // robot reset → log baru
+              } else if (!next.some((p) => p.objectId === it.objectId)) {
+                next = [it, ...next].slice(0, MAX_LOG);
+              }
+            }
+            return next;
+          });
         }
 
-        setLog((prev) => {
-          // Dedup: kalau objectId sudah ada, abaikan
-          if (prev.some((p) => p.objectId === item.objectId)) {
-            return prev;
-          }
-          // Tambah ke atas, batasi MAX_LOG baris
-          return [item, ...prev].slice(0, MAX_LOG);
-        });
-
+        if (sinceRef.current) {
+          setIsStale(Date.now() - new Date(sinceRef.current).getTime() > STALE_MS);
+        }
       } catch (err) {
         if (!active) return;
         setError(`Gagal fetch Back4App: ${err.message}`);
@@ -136,7 +114,6 @@ export default function useBack4AppData() {
       }
     };
 
-    // Langsung fetch sekali, lalu polling
     fetchData();
     const timer = setInterval(fetchData, BACK4APP_POLL_MS);
 
@@ -144,7 +121,7 @@ export default function useBack4AppData() {
       active = false;
       clearInterval(timer);
     };
-  }, []);   // hanya sekali mount
+  }, []);
 
-  return { latest, log, resetLog, isLoading, error };
+  return { latest, log, resetLog, isLoading, error, isStale };
 }

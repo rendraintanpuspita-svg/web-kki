@@ -19,11 +19,12 @@ import useCaptureImages   from '../hooks/useCaptureImages';
 import { DATA_SOURCE, VIDEO_STREAM_URL } from '../config';
 
 function LintasanB() {
-  const rosBridge = useAsvData();
-  const back4App  = useBack4AppData();
+  const rosBridge   = useAsvData();
+  const back4App    = useBack4AppData();
 
+  // Pilih sumber aktif
   const isRosBridge = DATA_SOURCE !== 'back4app';
-  const { latest, log, battery, mission, video1, video2, resetLog } =
+  const { latest, log, battery, mission, video1, video2, resetLog, isStale } =
     isRosBridge ? rosBridge : { ...back4App, battery: null, mission: null, video1: null, video2: null };
 
   const { surfaceSrc, underwaterSrc } = useCaptureImages();
@@ -57,7 +58,7 @@ function LintasanB() {
           <div className="grid h-full grid-rows-[3fr_4fr_3fr] gap-4">
 
             <div className="min-h-0 overflow-hidden">
-              <Geotag data={latest} />
+              <Geotag data={latest} stale={!isRosBridge && isStale} />
             </div>
 
             <div className="grid min-h-0 grid-cols-2 gap-4">

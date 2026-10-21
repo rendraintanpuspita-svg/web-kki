@@ -29,12 +29,12 @@ function LintasanA() {
   // =============================================================
   // DATA TELEMETRI — pilih berdasarkan DATA_SOURCE
   // =============================================================
-  const rosBridge   = useAsvData();        // selalu jalan (biar rosbridge standby)
-  const back4App    = useBack4AppData();   // selalu jalan (polling berhenti kalau key kosong)
+  const rosBridge   = useAsvData();
+  const back4App    = useBack4AppData();
 
   // Pilih sumber aktif
   const isRosBridge = DATA_SOURCE !== 'back4app';
-  const { latest, log, battery, mission, video1, video2, resetLog } =
+  const { latest, log, battery, mission, video1, video2, resetLog, isStale } =
     isRosBridge ? rosBridge : { ...back4App, battery: null, mission: null, video1: null, video2: null };
 
   // =============================================================
@@ -81,7 +81,7 @@ function LintasanA() {
 
             {/* Geotag & Telemetry */}
             <div className="min-h-0 overflow-hidden">
-              <Geotag data={latest} />
+              <Geotag data={latest} stale={!isRosBridge && isStale} />
             </div>
 
             {/* Capture Surface + Underwater */}

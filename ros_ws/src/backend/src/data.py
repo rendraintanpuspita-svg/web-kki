@@ -35,16 +35,22 @@ else:
 # ============================================================
 # KONFIGURASI BACK4APP — baca dari environment, JANGAN hardcode
 # ============================================================
-BACK4APP_APP_ID   = os.environ.get('BACK4APP_APP_ID',   '')
-BACK4APP_REST_KEY = os.environ.get('BACK4APP_REST_KEY', '')
-UPLOAD_INTERVAL   = float(os.environ.get('UPLOAD_INTERVAL', '5'))
+BACK4APP_APP_ID     = os.environ.get('BACK4APP_APP_ID',     'n2vZNBYLLTVmQynI5NKbsr37fFzqnLcBS0NOPmyp')
+BACK4APP_MASTER_KEY = os.environ.get('BACK4APP_MASTER_KEY', 'kEDjmU7XsJvTwBjHRelH4KCHZO2ulDDGKiOoeq8f ')
+BACK4APP_REST_KEY   = os.environ.get('BACK4APP_REST_KEY',   'SAPk6DeBqaAtvzM0ZF6SD1s3WYMPF2gekjf0siii')
+BACK4APP_CLASS      = os.environ.get('BACK4APP_CLASS',      'kapal')
+UPLOAD_INTERVAL     = float(os.environ.get('UPLOAD_INTERVAL', '1'))
 
-URL = 'https://parseapi.back4app.com/classes/kapal'
+URL = f'https://parseapi.back4app.com/classes/{BACK4APP_CLASS}'
 BACK4APP_HEADERS = {
     'X-Parse-Application-Id': BACK4APP_APP_ID,
-    'X-Parse-REST-API-Key':   BACK4APP_REST_KEY,
     'Content-Type':           'application/json',
 }
+# Master key (bisa menulis walau class dikunci) diutamakan daripada REST key
+if BACK4APP_MASTER_KEY:
+    BACK4APP_HEADERS['X-Parse-Master-Key'] = BACK4APP_MASTER_KEY
+else:
+    BACK4APP_HEADERS['X-Parse-REST-API-Key'] = BACK4APP_REST_KEY
 
 
 # ============================================================
@@ -146,10 +152,11 @@ def _try_upload(callback):
 # MAIN
 # ============================================================
 async def main():
-    if not BACK4APP_APP_ID or not BACK4APP_REST_KEY:
-        print('[ERROR] BACK4APP_APP_ID / BACK4APP_REST_KEY belum diset!')
-        print('  Jalankan: export BACK4APP_APP_ID=xxx BACK4APP_REST_KEY=yyy')
+    if not BACK4APP_APP_ID or not (BACK4APP_MASTER_KEY or BACK4APP_REST_KEY):
+        print('[ERROR] BACK4APP_APP_ID dan BACK4APP_MASTER_KEY belum diset!')
+        print('  Jalankan: set -a; source src/backend/.env; set +a')
         return
+    print(f'[INFO] upload ke class "{BACK4APP_CLASS}" tiap {UPLOAD_INTERVAL}s')
 
     rclpy.init()
     node = Node('data_node')

@@ -1,7 +1,7 @@
 const fmt = (value, digits) =>
   value === undefined || value === null ? "-" : Number(value).toFixed(digits);
 
-function Geotag({ data }) {
+function Geotag({ data, stale = false }) {
   const telemetry = [
     ["Date", data?.date ?? "-"],
     ["Time", data?.time ?? "-"],
